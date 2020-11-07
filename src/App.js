@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
@@ -7,22 +6,26 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-          username:null
+          id: null,
+          password: null
       };
   }
 
   componentDidMount() {
-    fetch('api/group')
+    fetch('api/users')
     .then(res=>res.json())
-    .then(data=>this.setState({username:data.username}));
+    .then(data=>this.setState({
+      id: data.id,
+      password: data.password
+    }));
   }
 
   render() {
-    const {username} = this.state;
+    const id = this.state.id;
     return (
       <div className="App">
         <header className="App-header">
-          {`Hello ${username}`}
+          {`Hello ${id}`}
         </header>
       </div>
     );
