@@ -1,7 +1,7 @@
-module.export = {
+module.exports = {
     host : 'localhost',
     user : 'root',
-    password : '3477',
+    password : 'wnddkd1204',
     database : 'my_db',
     insecureAuth: true
-};
+}
