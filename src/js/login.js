@@ -6,37 +6,28 @@ class login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            introFlag : false,
-            intro2Flag : false,
-            intro3Flag : false
+            introCnt : 0
         }
     }
 
+    addIntroCnt = () => {
+        this.setState({
+            introCnt: this.state.introCnt+1
+        });
+    }
+
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                introFlag: true
-            })
-        }, 1000)
-        setTimeout(() => {
-            this.setState({
-                intro2Flag: true
-            })
-        }, 2000)
-        setTimeout(() => {
-            this.setState({
-                intro3Flag: true
-            })
-        }, 3000)
+        for(let i = 1; i < 4; i++) {
+            setTimeout(this.addIntroCnt, i*1000)
+        }
     }
 
     render() {
         const appName = 'HEALIN';
+        const introClassArr = ["intro3 intro2 intro", "intro3 intro2", "intro3", ""];
         return (
             <div className={
-                "login " + (this.state.introFlag ? "" : "intro ") + 
-                (this.state.intro2Flag ? "" : "intro2 ") + 
-                (this.state.intro3Flag ? "" : "intro3")}>
+                "login " + (introClassArr[this.state.introCnt])}>
                 <div className='logo'>{appName}</div>
                 <div className='input'>
                     <input type='text' className='login_id' placeholder='아이디'></input>
