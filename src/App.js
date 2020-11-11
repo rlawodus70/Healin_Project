@@ -1,17 +1,17 @@
 import React from 'react';
-import commonCss from './css/common.css';
-import loginCss from './css/login.css';
+import './css/common.css';
 import Login from './js/login';
 
-// class App extends React.Component {
+class App extends React.Component {
 
-//   constructor(props) {
-//       super(props);
-//       this.state = {
-//           id: null,
-//           password: null
-//       };
-//   }
+  constructor(props) {
+      super(props);
+
+      // this.state = {
+      //     id: null,
+      //     password: null
+      // };
+  }
 
 //   componentDidMount() {
 //     fetch('api/users')
@@ -22,20 +22,15 @@ import Login from './js/login';
 //     }));
 //   }
 
-//   render() {
-//     const id = this.state.id;
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           {`Hello ${id}`}
-//         </header>
-//       </div>
-//     );
-//   }
-// }
-
-const App = () => {
-  return <Login />;
+  render() {
+    return (
+      <Login />
+    );
+  }
 }
+
+// const App = () => {
+//   return <Login />;
+// }
 
 export default App;
