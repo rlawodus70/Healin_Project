@@ -10,6 +10,12 @@ class login extends Component {
         }
     }
 
+    login = () => {
+        const user = {
+            
+        }
+    }
+
     addIntroCnt = () => {
         this.setState({
             introCnt: this.state.introCnt+1

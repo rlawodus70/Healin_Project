@@ -16,7 +16,10 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-
+    connection.query('select * from users', (err, rows) => {
+        if(err) throw err;
+        
+    })
 })
 
 module.exports = router;
