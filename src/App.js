@@ -13,14 +13,14 @@ class App extends React.Component {
       // };
   }
 
-//   componentDidMount() {
-//     fetch('api/users')
-//     .then(res=>res.json())
-//     .then(data=>this.setState({
-//       id: data.id,
-//       password: data.password
-//     }));
-//   }
+  componentDidMount() {
+    fetch('api/users')
+    .then(res=>res.json())
+    .then(data=>this.setState({
+      id: data.id,
+      password: data.password
+    }));
+  }
 
   render() {
     return (
