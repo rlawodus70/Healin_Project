@@ -17,7 +17,7 @@ router.get('/users', (req, res) => {
 
 router.post('/signIn', (req, res) => {
     const user = req.body;
-    connection.query(`select count(*) from users where id = '${user.id}' and password = '${user.pw}'`, (err, rows) => {
+    connection.query(`select * from users where id = '${user.id}' and password = '${user.pw}'`, (err, rows) => {
         if(err) throw err;
         if(rows.length === 1) {
             console.log("로그인 성공!");
