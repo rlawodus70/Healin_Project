@@ -8,7 +8,8 @@ class login extends Component {
         this.state = {
             introCnt : 0,
             id : '',
-            pw : ''
+            pw : '',
+            onSignUp : false
         }
     }
 
@@ -33,6 +34,18 @@ class login extends Component {
         })
     }
 
+    handleKeyPress = e => {
+        if(e.key === 'Enter') {
+            this.signIn();
+        }
+    }
+
+    handleChangeSignUp = e => {
+        this.setState({
+            onSignUp : this.state.onSignUp ? false : true
+        })
+    }
+
     addIntroCnt = () => {
         this.setState({
             introCnt: this.state.introCnt+1
@@ -49,15 +62,27 @@ class login extends Component {
         const appName = 'HEALIN';
         const introClassArr = ["intro3 intro2 intro", "intro3 intro2", "intro3", ""];
         return (
-            <div className={
-                "login " + (introClassArr[this.state.introCnt])}>
-                <div className='logo'>{appName}</div>
-                <div className='input'>
-                    <input type='text' className='login_id' onChange={this.handleChange} name='id' placeholder='아이디'></input>
-                    <input type='password' className='login_pw' onChange={this.handleChange} name='pw' placeholder='비밀번호'></input>
-                </div>
-                <div className='login_btn' onClick={this.signIn}>로그인</div>
-                <div className='login_signup'>손님, 회원 등록 하시겠어요?</div>
+            <div className='user'>
+                {this.state.onSignUp === false ? 
+                    <div className={`login ${introClassArr[this.state.introCnt]}`}>
+                        <div className='logo'>{appName}</div>
+                        <div className='input'>
+                            <input type='text' className='login_id' onChange={this.handleChange} name='id' placeholder='아이디'></input>
+                            <input type='password' className='login_pw' onChange={this.handleChange} name='pw' placeholder='비밀번호' onKeyPress={this.handleKeyPress}></input>
+                        </div>
+                        <div className='user_btn' onClick={this.signIn}>로그인</div>
+                        <div className='user_signup' onClick={this.handleChangeSignUp}>손님, 회원 등록 하시겠어요?</div>
+                    </div>
+                :   <div className='signup'>
+                        <div className='input'>
+                            <input type='text' placeholder='아이디'></input>
+                            <input type='password' placeholder='비밀번호'></input>
+                            <input type='password' placeholder='비밀번호 재확인'></input>
+                            <input type='text' placeholder='이메일'></input>
+                        </div>
+                        <div className='user_btn'>회원가입</div>
+                        <div className='user_signup' onClick={this.handleChangeSignUp}>계정이 이미 있습니다.</div>
+                    </div> }  
             </div>
         )
     }

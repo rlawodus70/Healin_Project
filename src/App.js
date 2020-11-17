@@ -24,13 +24,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <Login />
+        <Login /> 
     );
   }
 }
-
-// const App = () => {
-//   return <Login />;
-// }
 
 export default App;
