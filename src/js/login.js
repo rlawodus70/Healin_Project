@@ -9,6 +9,8 @@ class login extends Component {
             introCnt : 0,
             id : '',
             pw : '',
+            rePw : '',
+            email : '',
             onSignUp : false
         }
     }
@@ -19,6 +21,22 @@ class login extends Component {
             pw : this.state.pw
         }
         fetch('/api/signIn', {
+            method: 'POST',
+            dataType: "JSON",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify(user)
+        })
+    }
+
+    signUp = () => {
+        const user = {
+            id : this.state.id,
+            pw : this.state.pw,
+            email : this.state.email
+        }
+        fetch('/api/signUp', {
             method: 'POST',
             dataType: "JSON",
             headers: {
@@ -75,12 +93,12 @@ class login extends Component {
                     </div>
                 :   <div className='signup'>
                         <div className='input'>
-                            <input type='text' placeholder='아이디'></input>
-                            <input type='password' placeholder='비밀번호'></input>
+                            <input type='text' placeholder='아이디' onChange={this.handleChange} name='id'></input>
+                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} name='pw'></input>
                             <input type='password' placeholder='비밀번호 재확인'></input>
-                            <input type='text' placeholder='이메일'></input>
+                            <input type='text' placeholder='이메일' onChange={this.handleChange} name='email'></input>
                         </div>
-                        <div className='user_btn'>회원가입</div>
+                        <div className='user_btn' onClick={this.signUp}>회원가입</div>
                         <div className='user_signup' onClick={this.handleChangeSignUp}>계정이 이미 있습니다.</div>
                     </div> }  
             </div>

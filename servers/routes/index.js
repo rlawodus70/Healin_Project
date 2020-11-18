@@ -17,13 +17,23 @@ router.get('/users', (req, res) => {
 
 router.post('/signIn', (req, res) => {
     const user = req.body;
-    connection.query(`select * from users where id = '${user.id}' and password = '${user.pw}'`, (err, rows) => {
+    const sql = `select * from users where id = '${user.id}' and password = '${user.pw}'`;
+    connection.query(sql, (err, rows) => {
         if(err) throw err;
         if(rows.length === 1) {
             console.log("로그인 성공!");
         } else {
             console.log("로그인 실패!..");
         }
+    })
+})
+
+router.post('/signUp', (req, res) => {
+    const user = req.body;
+    const sql = `insert into users values('${user.id}','${user.pw}','${user.email}')`;
+    connection.query(sql, (err, rows) => {
+        if(err) throw err;
+        else console.log(rows.insertId)
     })
 })
 
