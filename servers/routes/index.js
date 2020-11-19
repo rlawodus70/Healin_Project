@@ -37,4 +37,14 @@ router.post('/signUp', (req, res) => {
     })
 })
 
+router.post('/idCheck', (req, res) => {
+    const user = req.body;
+    const sql = `select * from users where id = '${user.id}'`;
+    connection.query(sql, (err, rows) => {
+        if(err) throw err;
+        console.log(rows);
+        const result = { result : rows.length };
+        res.json(result);
+    })
+})
 module.exports = router;

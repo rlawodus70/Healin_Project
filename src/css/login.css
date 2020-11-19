@@ -58,6 +58,7 @@ body {
     border: 0.3px solid #999;
     border-radius: .6rem;
     margin-top: 5vw;
+    background-color: #f1f1f1;
 }
 /* signUp */
 .signup {

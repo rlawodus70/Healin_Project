@@ -46,6 +46,24 @@ class login extends Component {
         })
     }
 
+    idCheck = () => {
+        const user = {
+            id : this.state.id
+        }
+        fetch('/api/idCheck', {
+            method: 'POST',
+            dataType: "JSON",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify(user)
+        })
+        .then(data => data.json())
+        .then(json => {
+            console.log(json)
+        })
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name] : e.target.value
@@ -94,7 +112,7 @@ class login extends Component {
                 :   <div className='signup'>
                         <div className='input'>
                             <input type='text' placeholder='아이디' onChange={this.handleChange} name='id'></input>
-                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} name='pw'></input>
+                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} onFocus={this.idCheck} name='pw'></input>
                             <input type='password' placeholder='비밀번호 재확인'></input>
                             <input type='text' placeholder='이메일' onChange={this.handleChange} name='email'></input>
                         </div>
