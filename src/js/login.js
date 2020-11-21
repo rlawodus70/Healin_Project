@@ -113,6 +113,7 @@ class login extends Component {
                 :   <div className='signup'>
                         <div className='input'>
                             <input type='text' placeholder='아이디' onChange={this.handleChange} name='id'></input>
+                            <label>{this.state.idCheck === 1 ? '아이디가 존재합니다.' : '사용 가능한 아이디 입니다!'}</label>
                             <input type='password' placeholder='비밀번호' onChange={this.handleChange} onFocus={this.idCheck} name='pw'></input>
                             <input type='password' placeholder='비밀번호 재확인'></input>
                             <input type='text' placeholder='이메일' onChange={this.handleChange} name='email'></input>

@@ -60,6 +60,11 @@ body {
     margin-top: 5vw;
     background-color: #f1f1f1;
 }
+.input > label {
+    font-size: .9rem;
+    color: #333;
+    padding-left: 3%;
+}
 /* signUp */
 .signup {
     width: 100%;
