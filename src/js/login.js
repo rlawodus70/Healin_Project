@@ -11,7 +11,7 @@ class login extends Component {
             pw : '',
             rePw : '',
             email : '',
-            idCheck : '',
+            idCheck : 0,
             onSignUp : false
         }
     }
@@ -61,8 +61,7 @@ class login extends Component {
         })
         .then(data => data.json())
         .then(json => {
-            this.setState = { idCheck : json.result }
-            console.log(json)
+            this.setState({ idCheck : json.result })
         })
     }
 
