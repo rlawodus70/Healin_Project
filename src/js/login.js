@@ -12,6 +12,7 @@ class login extends Component {
             rePw : '',
             email : '',
             idCheck : 0,
+            pwCheck : 0,
             onSignUp : false
         }
     }
@@ -65,6 +66,19 @@ class login extends Component {
         })
     }
 
+    pwCheck = () => {
+        const user = {
+            pw : this.state.pw,
+            rePw : this.state.rePw
+        }
+        
+        if(user.pw === user.rePw) {
+            this.setState({ pwCheck : true })
+        } else {
+            this.setState({ pwCheck : false })
+        }
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name] : e.target.value
@@ -112,10 +126,11 @@ class login extends Component {
                     </div>
                 :   <div className='signup'>
                         <div className='input'>
-                            <input type='text' placeholder='아이디' onChange={this.handleChange} name='id'></input>
+                            <input type='text' placeholder='아이디' onChange={this.handleChange} name='id' onBlur={this.idCheck}></input>
                             <label>{this.state.idCheck === 1 ? '아이디가 존재합니다.' : '사용 가능한 아이디 입니다!'}</label>
-                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} onFocus={this.idCheck} name='pw'></input>
-                            <input type='password' placeholder='비밀번호 재확인'></input>
+                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} name='pw'></input>
+                            <input type='password' placeholder='비밀번호 재확인' onChange={this.handleChange} name='rePw' onBlur={this.pwCheck}></input>
+                            <label>{this.state.pwCheck ? '비밀번호가 같습니다!' : '비밀번호가 같지 않습니다!'}</label>
                             <input type='text' placeholder='이메일' onChange={this.handleChange} name='email'></input>
                         </div>
                         <div className='user_btn' onClick={this.signUp}>회원가입</div>
