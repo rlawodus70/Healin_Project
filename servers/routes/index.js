@@ -42,8 +42,18 @@ router.post('/idCheck', (req, res) => {
     const sql = `select * from users where id = '${user.id}'`;
     connection.query(sql, (err, rows) => {
         if(err) throw err;
+        const result = { length : rows.length };
+        res.json(result);
+    })
+})
+
+router.post('/emailCheck', (req, res) => {
+    const user = req.body;
+    const sql = `select * from users where email = '${user.email}'`;
+    connection.query(sql, (err, rows) => {
+        if(err) throw err;
         console.log(rows);
-        const result = { result : rows.length };
+        const result = { length : rows.length }
         res.json(result);
     })
 })
