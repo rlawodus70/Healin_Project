@@ -40,6 +40,7 @@ router.post('/signUp', (req, res) => {
 router.post('/idCheck', (req, res) => {
     const user = req.body;
     const sql = `select * from users where id = '${user.id}'`;
+
     connection.query(sql, (err, rows) => {
         if(err) throw err;
         const result = { length : rows.length };
@@ -47,7 +48,7 @@ router.post('/idCheck', (req, res) => {
     })
 })
 
-router.post('/emailCheck', (req, res) => {
+router.post('/emailCheck', (req, res) => {m
     const user = req.body;
     const sql = `select * from users where email = '${user.email}'`;
     connection.query(sql, (err, rows) => {
@@ -57,4 +58,5 @@ router.post('/emailCheck', (req, res) => {
         res.json(result);
     })
 })
+
 module.exports = router;

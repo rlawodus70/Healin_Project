@@ -53,18 +53,22 @@ class login extends Component {
         const user = {
             id : this.state.id
         }
-        fetch('/api/idCheck', {
-            method: 'POST',
-            dataType: "JSON",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body: JSON.stringify(user)
-        })
-        .then(data => data.json())
-        .then(json => {
-            this.setState({ idCheck : json.length })
-        })
+        if (!/^[a-z0-9]{7,20}$/.test(user.id)) {
+            this.setState({ idCheck : 2 })
+        } else {
+            fetch('/api/idCheck', {
+                method: 'POST',
+                dataType: "JSON",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify(user)
+            })
+            .then(data => data.json())
+            .then(json => {
+                this.setState({ idCheck : json.length })
+            })
+        }
     }
 
     pwCheck = () => {
@@ -146,7 +150,7 @@ class login extends Component {
                 :   <div className='signup'>
                         <div className='input'>
                             <input type='text' placeholder='아이디' onChange={this.handleChange} name='id' onBlur={this.idCheck}></input>
-                            <label>{this.state.idCheck === 1 ? '아이디가 존재합니다.' : '사용 가능한 아이디 입니다!'}</label>
+                            {this.state.idCheck === 0 ? '' : <label>{this.state.idCheck === 1 ? '아이디가 존재합니다.' : '소문자, 숫자 7~20자리로 입력해주세요!'}</label>}
                             <input type='password' placeholder='비밀번호' onChange={this.handleChange} name='pw'></input>
                             <input type='password' placeholder='비밀번호 재확인' onChange={this.handleChange} name='rePw' onBlur={this.pwCheck}></input>
                             <label>{this.state.pwCheck ? '비밀번호가 같습니다!' : '비밀번호가 같지 않습니다!'}</label>
