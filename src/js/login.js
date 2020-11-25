@@ -13,6 +13,7 @@ class login extends Component {
             email : '',
             idCheck : 0,
             pwCheck : 0,
+            pwSameCheck : 0,
             emailCheck : 0,
             onSignUp : false
         }
@@ -73,14 +74,26 @@ class login extends Component {
 
     pwCheck = () => {
         const user = {
+            pw : this.state.pw
+        }
+
+        if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(user.pw)) {
+            this.setState({ pwCheck : false })
+        } else {
+            this.setState({ pwCheck : true });
+        }
+    }
+
+    pwSameCheck = () => {
+        const user = {
             pw : this.state.pw,
             rePw : this.state.rePw
         }
         
         if(user.pw === user.rePw) {
-            this.setState({ pwCheck : true })
+            this.setState({ pwSameCheck : true })
         } else {
-            this.setState({ pwCheck : false })
+            this.setState({ pwSameCheck : false })
         }
     }
 
@@ -88,18 +101,22 @@ class login extends Component {
         const user = {
             email : this.state.email
         }
-        fetch('/api/emailCheck', {
-            method: 'POST',
-            dataType: "JSON",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body: JSON.stringify(user)
-        })
-        .then(data => data.json())
-        .then(json => {
-            this.setState({ emailCheck : json.length })
-        })
+        if(!/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(user.email)) {
+            this.setState({ emailCheck : 2 })
+        } else {
+            fetch('/api/emailCheck', {
+                method: 'POST',
+                dataType: "JSON",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify(user)
+            })
+            .then(data => data.json())
+            .then(json => {
+                this.setState({ emailCheck : json.length })
+            })
+        }
     }
 
     handleChange = e => {
@@ -151,11 +168,12 @@ class login extends Component {
                         <div className='input'>
                             <input type='text' placeholder='아이디' onChange={this.handleChange} name='id' onBlur={this.idCheck}></input>
                             {this.state.idCheck === 0 ? '' : <label>{this.state.idCheck === 1 ? '아이디가 존재합니다.' : '소문자, 숫자 7~20자리로 입력해주세요!'}</label>}
-                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} name='pw'></input>
-                            <input type='password' placeholder='비밀번호 재확인' onChange={this.handleChange} name='rePw' onBlur={this.pwCheck}></input>
-                            <label>{this.state.pwCheck ? '비밀번호가 같습니다!' : '비밀번호가 같지 않습니다!'}</label>
+                            <input type='password' placeholder='비밀번호' onChange={this.handleChange} onBlur={this.pwCheck} name='pw'></input>
+                            {this.state.pwCheck === 0 ? '' : <label>{!this.state.pwCheck ? '소문자, 숫자 8~20자리로 입력해주세요!' : "??"}</label>}
+                            <input type='password' placeholder='비밀번호 재확인' onChange={this.handleChange} name='rePw' onBlur={this.pwSameCheck}></input>
+                            {this.state.pwSameCheck === 0 ? '' : <label>{!this.state.pwSameCheck ? '비밀번호가 같지 않습니다!' : ''}</label> }
                             <input type='text' placeholder='이메일' onChange={this.handleChange} onBlur={this.emailCheck} name='email'></input>
-                            <label>{this.state.emailCheck === 1 ? '이메일이 존재합니다.' : '사용 가능한 이메일 입니다!'}</label>
+                            {this.state.emailCheck === 0 ? '' : <label>{this.state.emailCheck === 1 ? '이메일이 존재합니다.' : '이메일 형식을 지켜주세요!'}</label>}
                         </div>
                         <div className='user_btn' onClick={this.signUp}>회원가입</div>
                         <div className='user_signup' onClick={this.handleChangeSignUp}>계정이 이미 있습니다.</div>
