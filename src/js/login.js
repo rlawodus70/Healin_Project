@@ -144,14 +144,14 @@ class login extends Component {
     }
 
     componentDidMount() {
-        for(let i = 1; i < 4; i++) {
+        for(let i = 1; i < 5; i++) {
             setTimeout(this.addIntroCnt, i*1000)
         }
     }
 
     render() {
         const appName = 'HEALIN';
-        const introClassArr = ["intro3 intro2 intro", "intro3 intro2", "intro3", ""];
+        const introClassArr = ["intro4 intro3 intro2 intro", "intro4 intro3 intro2", "intro4 intro3", "intro4", ""];
         return (
             <div className='user'>
                 {this.state.onSignUp === false ? 
