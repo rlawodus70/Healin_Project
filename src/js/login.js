@@ -19,7 +19,7 @@ class login extends Component {
         }
     }
 
-    signIn = () => {
+    signIn = () => {    //로그인 함수
         const user = {
             id : this.state.id,
             pw : this.state.pw
@@ -34,7 +34,7 @@ class login extends Component {
         })
     }
 
-    signUp = () => {
+    signUp = () => {    //회원가입 함수
         const user = {
             id : this.state.id,
             pw : this.state.pw,
@@ -50,7 +50,7 @@ class login extends Component {
         })
     }
 
-    idCheck = () => {
+    idCheck = () => {   //아이디 중복검사
         const user = {
             id : this.state.id
         }
@@ -72,7 +72,7 @@ class login extends Component {
         }
     }
 
-    pwCheck = () => {
+    pwCheck = () => {   //비밀번호 정규식 검사
         const user = {
             pw : this.state.pw
         }
@@ -84,7 +84,7 @@ class login extends Component {
         }
     }
 
-    pwSameCheck = () => {
+    pwSameCheck = () => {   //비밀번호 같은지 검사
         const user = {
             pw : this.state.pw,
             rePw : this.state.rePw
@@ -97,7 +97,7 @@ class login extends Component {
         }
     }
 
-    emailCheck = () => {
+    emailCheck = () => {    //이메일 정규식 검사
         const user = {
             email : this.state.email
         }
