@@ -22,8 +22,14 @@ router.post('/signIn', (req, res) => {
         if(err) throw err;
         if(rows.length === 1) {
             console.log("로그인 성공!");
+            req.session.uid = rows[0].id;
+            console.log(req.session.uid)
+            req.session.save(function() {
+                res.redirect('/');
+            })
         } else {
             console.log("로그인 실패!..");
+            console.log(req.session.uid)
         }
     })
 })
@@ -38,6 +44,7 @@ router.post('/signUp', (req, res) => {
 })
 
 router.post('/idCheck', (req, res) => {
+    console.log(req.session.uid)
     const user = req.body;
     const sql = `select * from users where id = '${user.id}'`;
     connection.query(sql, (err, rows) => {

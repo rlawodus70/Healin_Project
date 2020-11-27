@@ -19,7 +19,7 @@ class login extends Component {
         }
     }
 
-    signIn = () => {    //로그인 함수
+    signIn = () => {    //로그인
         const user = {
             id : this.state.id,
             pw : this.state.pw
@@ -34,7 +34,7 @@ class login extends Component {
         })
     }
 
-    signUp = () => {    //회원가입 함수
+    signUp = () => {    //회원가입
         const user = {
             id : this.state.id,
             pw : this.state.pw,
@@ -169,7 +169,7 @@ class login extends Component {
                             <input type='text' placeholder='아이디' onChange={this.handleChange} name='id' onBlur={this.idCheck}></input>
                             {this.state.idCheck === 0 ? '' : <label>{this.state.idCheck === 1 ? '아이디가 존재합니다.' : '소문자, 숫자 7~20자리로 입력해주세요!'}</label>}
                             <input type='password' placeholder='비밀번호' onChange={this.handleChange} onBlur={this.pwCheck} name='pw'></input>
-                            {this.state.pwCheck === 0 ? '' : <label>{!this.state.pwCheck ? '소문자, 숫자 8~20자리로 입력해주세요!' : "??"}</label>}
+                            {this.state.pwCheck === 0 ? '' : <label>{!this.state.pwCheck ? '소문자, 숫자 8~20자리로 입력해주세요!' : ""}</label>}
                             <input type='password' placeholder='비밀번호 재확인' onChange={this.handleChange} name='rePw' onBlur={this.pwSameCheck}></input>
                             {this.state.pwSameCheck === 0 ? '' : <label>{!this.state.pwSameCheck ? '비밀번호가 같지 않습니다!' : ''}</label> }
                             <input type='text' placeholder='이메일' onChange={this.handleChange} onBlur={this.emailCheck} name='email'></input>
