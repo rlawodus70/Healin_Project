@@ -23,9 +23,8 @@ router.post('/signIn', (req, res) => {
         if(rows.length === 1) {
             console.log("로그인 성공!");
             req.session.uid = rows[0].id;
-            console.log(req.session.uid)
-            req.session.save(function() {
-                res.redirect('/');
+            req.session.save(() => {
+                res.redirect('main');
             })
         } else {
             console.log("로그인 실패!..");

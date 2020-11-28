@@ -1,16 +1,13 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './css/common.css';
 import Login from './js/login';
+import Main from './js/main';
 
 class App extends React.Component {
 
   constructor(props) {
       super(props);
-
-      // this.state = {
-      //     id: null,
-      //     password: null
-      // };
   }
 
   componentDidMount() {
@@ -24,7 +21,10 @@ class App extends React.Component {
 
   render() {
     return (
-        <Login /> 
+      <Router>
+        <Route exact path="/" component={Login}/>
+        <Route exact path="/main" component={Main}/>
+      </Router>
     );
   }
 }
