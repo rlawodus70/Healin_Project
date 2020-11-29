@@ -24,11 +24,11 @@ router.post('/signIn', (req, res) => {
             console.log("로그인 성공!");
             req.session.uid = rows[0].id;
             req.session.save(() => {
-                res.redirect('main');
+                res.redirect('http://localhost:3000/main');
             })
+            res.redirect('http://localhost:3000/main');
         } else {
             console.log("로그인 실패!..");
-            console.log(req.session.uid)
         }
     })
 })
