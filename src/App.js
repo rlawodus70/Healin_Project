@@ -1,14 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './css/common.css';
 import Login from './js/login';
 import Main from './js/main';
 
 class App extends React.Component {
 
-  constructor(props) {
-      super(props);
-  }
+  // constructor(props) {
+  //     super(props);
+  // }
 
   componentDidMount() {
     fetch('api/users')

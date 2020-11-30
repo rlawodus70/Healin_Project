@@ -18,18 +18,21 @@ router.get('/users', (req, res) => {
 router.post('/signIn', (req, res) => {
     const user = req.body;
     const sql = `select * from users where id = '${user.id}' and password = '${user.pw}'`;
+    let status = {
+        "result": ""
+    };
     connection.query(sql, (err, rows) => {
         if(err) throw err;
         if(rows.length === 1) {
             console.log("로그인 성공!");
             req.session.uid = rows[0].id;
-            req.session.save(() => {
-                res.redirect('http://localhost:3000/main');
-            })
-            res.redirect('http://localhost:3000/main');
+            req.session.save();
+            status.result = 'success';
         } else {
             console.log("로그인 실패!..");
+            status.result = 'fail';
         }
+        res.json(status);
     })
 })
 

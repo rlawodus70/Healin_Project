@@ -32,6 +32,15 @@ class login extends Component {
             },
             body: JSON.stringify(user)
         })
+        .then(data => data.json())
+        .then(json => {
+            console.log(json)
+            if(json.result === "success") {
+                window.location.replace("/main");
+            } else {
+                alert("아이디 혹은 비밀번호를 확인해주세요!")
+            }
+        })
     }
 
     signUp = () => {    //회원가입
