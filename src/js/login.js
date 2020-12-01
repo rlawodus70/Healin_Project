@@ -24,39 +24,48 @@ class login extends Component {
             id : this.state.id,
             pw : this.state.pw
         }
-        fetch('/api/signIn', {
-            method: 'POST',
-            dataType: "JSON",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body: JSON.stringify(user)
-        })
-        .then(data => data.json())
-        .then(json => {
-            console.log(json)
-            if(json.result === "success") {
-                window.location.replace("/main");
-            } else {
-                alert("아이디 혹은 비밀번호를 확인해주세요!")
-            }
-        })
+        if(user.id === '' || user.pw === '') {
+            alert("아이디 혹은 비밀번호를 확인해주세요!")
+        } else {
+            fetch('/api/signIn', {
+                method: 'POST',
+                dataType: "JSON",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify(user)
+            })
+            .then(data => data.json())
+            .then(json => {
+                console.log(json)
+                if(json.result === "success") {
+                    window.location.replace("/main");
+                } else {
+                    alert("아이디 혹은 비밀번호를 확인해주세요!")
+                }
+            })
+        }
     }
 
     signUp = () => {    //회원가입
         const user = {
             id : this.state.id,
             pw : this.state.pw,
+            rePw : this.state.rePw,
             email : this.state.email
         }
-        fetch('/api/signUp', {
-            method: 'POST',
-            dataType: "JSON",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body: JSON.stringify(user)
-        })
+        if(user.id === '' || user.pw === '' || user.rePw === '' || user.email === '') {
+            alert("정보를 전부 입력해주세요!");
+        } else {
+            fetch('/api/signUp', {
+                method: 'POST',
+                dataType: "JSON",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify(user)
+            })
+        }
     }
 
     idCheck = () => {   //아이디 중복검사
@@ -85,8 +94,9 @@ class login extends Component {
         const user = {
             pw : this.state.pw
         }
-
-        if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(user.pw)) {
+        if(user.pw === '') {
+            this.setState({ pwCheck : -1 })
+        } else if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(user.pw)) {
             this.setState({ pwCheck : false })
         } else {
             this.setState({ pwCheck : true });
