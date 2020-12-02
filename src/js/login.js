@@ -56,10 +56,16 @@ class login extends Component {
             id : this.state.id,
             pw : this.state.pw,
             rePw : this.state.rePw,
-            email : this.state.email
+            email : this.state.email,
+            idCheck : this.state.idCheck,
+            pwCheck : this.state.pwCheck,
+            rePwCheck : this.state.rePwCheck,
+            emailCheck : this.state.emailCheck
         }
         if(user.id === '' || user.pw === '' || user.rePw === '' || user.email === '') {
             alert("정보를 전부 입력해주세요!");
+        } else if(!user.idCheck || !user.pwCheck || !user.rePwCheck || !user.emailCheck) {
+            alert("잘못된 정보가 없는지 다시 한번 확인해보세요!");
         } else {
             fetch('/api/signUp', {
                 method: 'POST',
