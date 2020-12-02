@@ -15,6 +15,10 @@ class login extends Component {
             pwLabel : '',
             rePwLabel : '',
             emailLabel : '',
+            idCheck : false,
+            pwCheck : false,
+            rePwCheck : false,
+            emailCheck : false,
             onSignUp : false
         }
     }
@@ -73,7 +77,10 @@ class login extends Component {
             id : this.state.id
         }
         if (!/^[a-z0-9]{7,20}$/.test(user.id)) {
-            this.setState({ idLabel : '소문자, 숫자 7~20자리로 입력해주세요!' })
+            this.setState({ 
+                idLabel : '소문자, 숫자 7~20자리로 입력해주세요!',
+                idCheck : false
+            })
         } else {
             fetch('/api/idCheck', {
                 method: 'POST',
@@ -86,9 +93,15 @@ class login extends Component {
             .then(data => data.json())
             .then(json => {
                 if(json.length === 1) {
-                    this.setState({ idLabel : '아이디가 존재합니다.' })
+                    this.setState({ 
+                        idLabel : '아이디가 존재합니다.',
+                        idCheck : false
+                    })
                 } else {
-                    this.setState({ idLabel : '사용 가능한 아이디입니다.' })
+                    this.setState({ 
+                        idLabel : '사용 가능한 아이디입니다.',
+                        idCheck : true
+                    })
                 }
             })
         }
@@ -99,9 +112,15 @@ class login extends Component {
             pw : this.state.pw
         }
         if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(user.pw)) {
-            this.setState({ pwLabel : '소문자, 숫자 8~20자리로 입력해주세요!' })
+            this.setState({ 
+                pwLabel : '소문자, 숫자 8~20자리로 입력해주세요!',
+                pwCheck : false
+            })
         } else {
-            this.setState({ pwLabel : '사용 가능한 비밀번호입니다.'});
+            this.setState({ 
+                pwLabel : '사용 가능한 비밀번호입니다.',
+                pwCheck : true
+            });
         }
     }
 
@@ -110,11 +129,22 @@ class login extends Component {
             pw : this.state.pw,
             rePw : this.state.rePw
         }
-        
-        if(user.pw === user.rePw) {
-            this.setState({ rePwLabel : '비밀번호가 같습니다!' })
+
+        if(user.rePw === '') {
+            this.setState({ 
+                rePwLabel : '필수사항 입니다. 입력해주세요.',
+                rePwCheck : false
+            })
+        } else if(user.pw === user.rePw) {
+            this.setState({ 
+                rePwLabel : '비밀번호가 같습니다!',
+                rePwCheck : true
+            })
         } else {
-            this.setState({ rePwLabel : '비밀번호가 같지 않습니다!' })
+            this.setState({ 
+                rePwLabel : '비밀번호가 같지 않습니다!',
+                rePwCheck : false
+            })
         }
     }
 
@@ -123,7 +153,10 @@ class login extends Component {
             email : this.state.email
         }
         if(!/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(user.email)) {
-            this.setState({ emailLabel : '이메일 형식을 지켜주세요!' })
+            this.setState({ 
+                emailLabel : '이메일 형식을 지켜주세요!',
+                emailCheck : false
+            })
         } else {
             fetch('/api/emailCheck', {
                 method: 'POST',
@@ -136,9 +169,15 @@ class login extends Component {
             .then(data => data.json())
             .then(json => {
                 if(json.length === 1) {
-                    this.setState({ emailLabel : '이메일이 존재합니다.' })
+                    this.setState({ 
+                        emailLabel : '이메일이 존재합니다.',
+                        emailCheck : false
+                    })
                 } else {
-                    this.setState({ emailLabel : '사용 가능한 이메일입니다!' })
+                    this.setState({ 
+                        emailLabel : '사용 가능한 이메일입니다!',
+                        emailCheck : true
+                    })
                 }
             })
         }
@@ -192,13 +231,13 @@ class login extends Component {
                 :   <div className='signup'>
                         <div className='input'>
                             <input type='text' placeholder='아이디' onChange={this.handleChange} name='id' onBlur={this.idCheck}></input>
-                            <label>{this.state.idLabel}</label>
+                            <label className={`input_label ${this.state.idCheck ? 'green' : 'red'}`}>{this.state.idLabel}</label>
                             <input type='password' placeholder='비밀번호' onChange={this.handleChange} onBlur={this.pwCheck} name='pw'></input>
-                            <label>{this.state.pwLabel}</label>
+                            <label className={`input_label ${this.state.pwCheck ? 'green' : 'red'}`}>{this.state.pwLabel}</label>
                             <input type='password' placeholder='비밀번호 재확인' onChange={this.handleChange} name='rePw' onBlur={this.pwSameCheck}></input>
-                            <label>{this.state.rePwLabel}</label>
+                            <label className={`input_label ${this.state.rePwCheck ? 'green' : 'red'}`}>{this.state.rePwLabel}</label>
                             <input type='text' placeholder='이메일' onChange={this.handleChange} onBlur={this.emailCheck} name='email'></input>
-                            <label>{this.state.emailLabel}</label>
+                            <label className={`input_label ${this.state.emailCheck ? 'green' : 'red'}`}>{this.state.emailLabel}</label>
                         </div>
                         <div className='user_btn' onClick={this.signUp}>회원가입</div>
                         <div className='user_signup' onClick={this.handleChangeSignUp}>계정이 이미 있습니다.</div>
