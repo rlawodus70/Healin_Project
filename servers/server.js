@@ -1,5 +1,6 @@
 const express = require('express');
 const login = require('./routes/loginModule');
+const main = require('./routes/mainModule');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;
@@ -16,7 +17,8 @@ app.use(session({
     store: sessionStore
 }))
 app.use(bodyParser.json());
-app.use('/api', login);
+app.use('/user', login);
+app.use('/mainMoudle', main);
 
 app.listen(port, ()=>{
     console.log(`express is running on ${port}`);

@@ -31,7 +31,7 @@ class login extends Component {
         if(user.id === '' || user.pw === '') {
             alert("아이디 혹은 비밀번호를 확인해주세요!")
         } else {
-            fetch('/api/signIn', {
+            fetch('/user/signIn', {
                 method: 'POST',
                 dataType: "JSON",
                 headers: {
@@ -67,7 +67,7 @@ class login extends Component {
         } else if(!user.idCheck || !user.pwCheck || !user.rePwCheck || !user.emailCheck) {
             alert("잘못된 정보가 없는지 다시 한번 확인해보세요!");
         } else {
-            fetch('/api/signUp', {
+            fetch('/user/signUp', {
                 method: 'POST',
                 dataType: "JSON",
                 headers: {
@@ -88,7 +88,7 @@ class login extends Component {
                 idCheck : false
             })
         } else {
-            fetch('/api/idCheck', {
+            fetch('/user/idCheck', {
                 method: 'POST',
                 dataType: "JSON",
                 headers: {
@@ -164,7 +164,7 @@ class login extends Component {
                 emailCheck : false
             })
         } else {
-            fetch('/api/emailCheck', {
+            fetch('/user/emailCheck', {
                 method: 'POST',
                 dataType: "JSON",
                 headers: {
