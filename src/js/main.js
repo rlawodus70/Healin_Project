@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Main extends Component {
 
     componentDidMount() {
-        fetch('/mainModule/checkSession', {
+        fetch('/home/check', {
             method: 'POST',
             dataType: "JSON",
             headers: {

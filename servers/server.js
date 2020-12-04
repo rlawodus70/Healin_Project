@@ -17,9 +17,10 @@ app.use(session({
     store: sessionStore
 }))
 app.use(bodyParser.json());
+app.use('/home', main);
 app.use('/user', login);
-app.use('/mainMoudle', main);
 
-app.listen(port, ()=>{
+
+app.listen(port, () => {
     console.log(`express is running on ${port}`);
 })

@@ -8,7 +8,7 @@ module.exports = function(app) {
         })
     )
     app.use(
-        createProxyMiddleware('/mainModule', {
+        createProxyMiddleware('/home', {
             target: 'http://localhost:3001/',
             changeOrigin: true
         })
