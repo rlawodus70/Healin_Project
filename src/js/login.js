@@ -203,6 +203,14 @@ class login extends Component {
 
     handleChangeSignUp = e => {
         this.setState({
+            idLabel : '',
+            pwLabel : '',
+            rePwLabel : '',
+            emailLabel : '',
+            idCheck : false,
+            pwCheck : false,
+            rePwCheck : false,
+            emailCheck : false,
             onSignUp : this.state.onSignUp ? false : true
         })
     }
